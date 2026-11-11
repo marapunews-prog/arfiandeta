@@ -1,0 +1,138 @@
+{
+  "v": 1,
+  "s": {
+    "name": "SCM Sumba",
+    "k": "Kebijakan Publik · Lingkungan · Masyarakat Adat",
+    "h": "Mengawal kebijakan, merawat tanah Marapu dan masa depan Sumba.",
+    "t": "SCM adalah ruang belajar dan bersuara bagi warga, pemuda, dan komunitas adat untuk mendiskusikan, mengkaji, dan mengadvokasi kebijakan yang menyentuh hidup orang Sumba.",
+    "email": "halo@arfiandeta.com",
+    "about": "SCM adalah inisiatif praktisi dan pemerhati kebijakan publik di Sumba, Nusa Tenggara Timur.\n\nKami percaya kebijakan yang baik lahir dari pengetahuan warga, penghormatan pada adat, dan pemerintahan yang terbuka. Situs ini dikelola oleh Arfian Deta sebagai ruang dokumentasi, diskusi, dan advokasi.",
+    "addr": "Sumba, Nusa Tenggara Timur"
+  },
+  "posts": [
+    {
+      "id": "p1",
+      "cat": "Lingkungan",
+      "title": "Krisis air di Sumba: persoalan alam atau tata kelola?",
+      "sum": "Menelaah akar kelangkaan air dan kebijakan yang diperlukan.",
+      "body": "Kelangkaan air di Sumba sering dibaca sebagai takdir alam. Tulisan ini mengajak melihatnya juga sebagai soal tata kelola.\n\n## Apa yang perlu dikaji\n\n- Data sumber air dan debit per musim\n- Anggaran air bersih di APBD dan dana desa\n- Siapa yang mengelola dan siapa yang mengawasi\n\n## Langkah berikutnya\n\nPisahkan paragraf dengan satu baris kosong. Gunakan **teks tebal** dan [tautan](https://arfiandeta.com) bila perlu. Ganti isi contoh ini lewat Panel Admin.",
+      "date": "2026-11-01",
+      "author": "Arfian Deta"
+    },
+    {
+      "id": "p2",
+      "cat": "Masyarakat Adat",
+      "title": "Tanah ulayat dan pengakuan masyarakat adat di NTT",
+      "sum": "Peta jalan pengakuan wilayah adat di tingkat kabupaten.",
+      "body": "Contoh artikel. Silakan ubah atau hapus.",
+      "date": "2026-10-20",
+      "author": "Arfian Deta"
+    },
+    {
+      "id": "p3",
+      "cat": "Pemerintahan",
+      "title": "Membaca APBD: ke mana uang daerah mengalir?",
+      "sum": "Panduan sederhana bagi warga memantau anggaran.",
+      "body": "Contoh artikel. Silakan ubah atau hapus.",
+      "date": "2026-10-10",
+      "author": "Arfian Deta"
+    },
+    {
+      "id": "p4",
+      "cat": "Sosial",
+      "title": "Stunting di Sumba dan peran desa",
+      "sum": "Mengapa intervensi gizi perlu berbasis data desa.",
+      "body": "Contoh artikel. Silakan ubah atau hapus.",
+      "date": "2026-09-28",
+      "author": "Arfian Deta"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "day": "12",
+      "mon": "DES",
+      "title": "Ngobrol Kebijakan: Air Bersih untuk Sumba",
+      "desc": "Diskusi terbuka bersama warga, desa, dan OPD. (contoh)",
+      "place": "Waingapu, Sumba Timur"
+    },
+    {
+      "id": "e2",
+      "day": "20",
+      "mon": "JAN",
+      "title": "Kelas Dasar: Membaca APBD & Dana Desa",
+      "desc": "Pelatihan singkat agar warga bisa memantau anggaran. (contoh)",
+      "place": "Waingapu, Sumba Timur"
+    }
+  ],
+  "focus": [
+    {
+      "id": "f1",
+      "icon": "🌳",
+      "title": "Lingkungan Hidup",
+      "text": "Krisis air, alih fungsi lahan, hutan, pesisir, dan perubahan iklim."
+    },
+    {
+      "id": "f2",
+      "icon": "🪢",
+      "title": "Masyarakat Adat",
+      "text": "Hak ulayat, tanah adat, kearifan Marapu, dan perlindungan wilayah adat."
+    },
+    {
+      "id": "f3",
+      "icon": "🤝",
+      "title": "Sosial",
+      "text": "Pendidikan, kesehatan, stunting, kemiskinan, dan kelompok rentan."
+    },
+    {
+      "id": "f4",
+      "icon": "🏛️",
+      "title": "Pemerintahan Daerah",
+      "text": "Anggaran, dana desa, pelayanan publik, dan partisipasi warga."
+    }
+  ],
+  "steps": [
+    {
+      "id": "a1",
+      "title": "Dengar & kumpulkan masalah",
+      "text": "Aduan warga, data lapangan, dokumen resmi."
+    },
+    {
+      "id": "a2",
+      "title": "Kaji & rumuskan",
+      "text": "Analisis hukum, anggaran, dan dampak sosial-ekologis."
+    },
+    {
+      "id": "a3",
+      "title": "Dialog & surat terbuka",
+      "text": "Bertemu pemerintah desa, DPRD, dan dinas."
+    },
+    {
+      "id": "a4",
+      "title": "Kampanye & pemantauan",
+      "text": "Menyebarkan informasi dan mengawal tindak lanjut."
+    }
+  ],
+  "issues": [
+    {
+      "id": "i1",
+      "issue": "Kepastian tanah adat",
+      "area": "Masyarakat Adat"
+    },
+    {
+      "id": "i2",
+      "issue": "Krisis air & kekeringan",
+      "area": "Lingkungan"
+    },
+    {
+      "id": "i3",
+      "issue": "Transparansi dana desa",
+      "area": "Pemerintahan"
+    },
+    {
+      "id": "i4",
+      "issue": "Stunting & layanan dasar",
+      "area": "Sosial"
+    }
+  ]
+}

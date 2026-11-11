@@ -1,0 +1,10 @@
+{
+  "name": "scm-sumba",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Situs SCM Sumba untuk Netlify (statis + Functions + Blobs)",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

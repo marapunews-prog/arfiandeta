@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SCM Panel</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{--or:#ff6c2c;--or2:#e85a1c;--nav:#293a4a;--nav2:#1f2d3a;--bg:#f2f4f7;--card:#fff;--ink:#2b3640;--mut:#6b7885;--line:#dde2e8;--ok:#1e8e4e;--bad:#c62828;--warn:#fff4e0;--warnb:#f0a830}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input,select,textarea{font:inherit}
+a{color:var(--or2)}
+.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 16px;height:54px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px}
+.brand i{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;background:var(--or);color:#fff;font-style:normal;font-size:13px}
+.sp{flex:1}
+.search{max-width:320px;width:100%;padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.user{color:var(--mut);font-size:13px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 54px)}
+.side{background:var(--nav);color:#cdd6df;padding:10px 0}
+.side h6{margin:14px 18px 6px;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#8fa0b0}
+.side button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:inherit;text-align:left;padding:10px 18px;cursor:pointer;border-left:3px solid transparent}
+.side button:hover{background:var(--nav2)}
+.side button.on{background:var(--nav2);color:#fff;border-left-color:var(--or)}
+.side .n{margin-left:auto;background:#3b5063;border-radius:10px;padding:0 8px;font-size:12px}
+.main{padding:22px;min-width:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:16px}
+.card h2{margin:0 0 12px;font-size:15px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.home{display:grid;grid-template-columns:1fr 310px;gap:16px;align-items:start}
+.grp{margin-bottom:18px}.grp:last-child{margin-bottom:0}
+.grp h3{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;background:#fff;border:1px solid var(--line);border-radius:8px;cursor:pointer;text-align:center;color:var(--ink)}
+.tile:hover{border-color:var(--or);box-shadow:0 2px 8px #0001}
+.tile span{font-size:28px;line-height:1}.tile b{font-weight:600;font-size:13px}
+table{width:100%;border-collapse:collapse}td,th{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut)}
+.info td:first-child{color:var(--mut);width:48%}
+.tw{overflow-x:auto}
+.btn{display:inline-block;border:1px solid var(--or);background:var(--or);color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;text-decoration:none}
+.btn:hover{background:var(--or2)}
+.btn.o{background:#fff;color:var(--ink);border-color:var(--line)}.btn.o:hover{border-color:var(--or)}
+.btn.d{background:var(--bad);border-color:var(--bad)}
+.btn.sm{padding:4px 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:wait}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fm{display:grid;gap:10px;max-width:780px}
+label{font-weight:600;font-size:13px;color:var(--mut)}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid #ff6c2c55;border-color:var(--or)}
+.msg{padding:10px 14px;border-radius:6px;margin-bottom:14px;background:#e8f6ee;border:1px solid #b6e0c7;color:#14633a}
+.msg.err{background:#fdeaea;border-color:#f0b4b4;color:var(--bad)}
+.warn{padding:10px 14px;border-radius:6px;margin-bottom:14px;background:var(--warn);border:1px solid var(--warnb)}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;background:#e8f6ee;color:var(--ok)}.badge.b{background:#fdeaea;color:var(--bad)}.badge.w{background:var(--warn);color:#8a5a00}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,var(--nav),var(--nav2))}
+.login .card{width:100%;max-width:380px;padding:28px}
+.login .brand{justify-content:center;margin-bottom:6px;font-size:22px}
+.login p{text-align:center;color:var(--mut);margin:0 0 18px}
+.hint{font-size:12.5px;color:var(--mut);font-weight:400}
+.ord{white-space:nowrap}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.side{display:flex;overflow-x:auto;padding:0}.side h6{display:none}.side button{width:auto;white-space:nowrap;border-left:0;border-bottom:3px solid transparent}.side button.on{border-bottom-color:var(--or)}.home{grid-template-columns:1fr}.user{display:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var CATS=["Lingkungan","Masyarakat Adat","Sosial","Pemerintahan"];
+// Skema: [kunci, label, tipe, batas/opsi, wajib]
+var COLL={
+ posts:{t:"Tulisan",ico:"\u{1F4DD}",cols:["title","cat","date"],f:[["cat","Kategori","select",CATS],["title","Judul","text",200,1],["sum","Ringkasan","text",400],["author","Penulis","text",80],["date","Tanggal","date"],["body","Isi artikel","area",14,0,"Paragraf dipisah baris kosong. Dukungan: ## Judul, - daftar, **tebal**, [teks](https://tautan)"]]},
+ events:{t:"Agenda",ico:"\u{1F4C5}",order:1,cols:["title","day","mon"],f:[["day","Tanggal (angka)","text",4],["mon","Bulan (mis. DES)","text",6],["title","Judul","text",200,1],["place","Lokasi","text",120],["desc","Deskripsi","area",3]]},
+ focus:{t:"Bidang Fokus",ico:"\u{1F333}",order:1,cols:["icon","title","text"],f:[["icon","Ikon (emoji)","text",8],["title","Judul","text",100,1],["text","Keterangan","area",3]]},
+ steps:{t:"Langkah Advokasi",ico:"\u{1FAA2}",order:1,cols:["title","text"],f:[["title","Judul langkah","text",120,1],["text","Keterangan","area",3]]},
+ issues:{t:"Isu Prioritas",ico:"\u{1F3AF}",order:1,cols:["issue","area"],f:[["issue","Isu","text",150,1],["area","Bidang","text",60]]}
+};
+var S={mode:"",token:"",tab:"home",edit:null,data:null,msg:"",err:"",dp:false,q:"",busy:false,lq:""};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function uid(){return Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36)}
+function lget(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function sget(k){try{return sessionStorage.getItem(k)}catch(e){return null}}
+function sset(k,v){try{v==null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v)}catch(e){}}
+
+async function api(a,body){
+  var o={headers:{}};
+  if(S.token)o.headers.Authorization="Bearer "+S.token;
+  if(body!==undefined){o.method="POST";o.headers["Content-Type"]="application/json";o.body=JSON.stringify(body)}
+  var j={},st=0;
+  try{var r=await fetch("/api/admin?a="+a,o);st=r.status;try{j=await r.json()}catch(e){j={error:"Server fungsi belum aktif (status "+st+")."}}}
+  catch(e){j={error:"Tidak bisa terhubung ke server."}}
+  j._s=st;return j}
+
+function norm(d){["posts","events","focus","steps","issues"].forEach(function(k){if(!Array.isArray(d[k]))d[k]=[]});d.s=d.s||{};return d}
+async function staticData(){var r=await fetch("../data/content.json",{cache:"no-cache"});return norm(await r.json())}
+
+async function boot(){
+  var p=await api("ping");
+  S.mode=(p.ok&&p.mode==="api")?"api":"local";
+  if(S.mode==="local"){
+    var l=lget("scm_local_v1");
+    try{S.data=l?norm(JSON.parse(l)):await staticData()}catch(e){S.err="Gagal memuat data bawaan.";return render()}
+    return render()}
+  S.token=sget("scm_tok")||"";
+  if(S.token){var m=await api("me");if(m.ok){S.dp=m.default_pw;await loadData()}else{S.token="";sset("scm_tok",null)}}
+  render()}
+async function loadData(){
+  try{var r=await fetch("/api/content",{cache:"no-store"});var j=r.ok?await r.json():null;if(j&&j.s)return S.data=norm(j)}catch(e){}
+  try{S.data=await staticData()}catch(e){S.err="Gagal memuat data."}}
+
+async function persist(okMsg){
+  S.busy=true;render();
+  if(S.mode==="local"){S.data.v=Date.now();lset("scm_local_v1",JSON.stringify(S.data));S.busy=false;return flash(okMsg+" (disimpan di browser ini)")}
+  var r=await api("save",{data:S.data});S.busy=false;
+  if(r.ok){S.data=norm(r.data);flash(okMsg)}
+  else if(r._s===401){S.token="";sset("scm_tok",null);S.data=null;S.err=r.error;render()}
+  else flash(r.error||"Gagal menyimpan.",true)}
+function flash(m,e){S.msg=e?"":m;S.err=e?m:"";render()}
+
+var NAV=[["Utama",[["home","\u{1F3E0}","Beranda"]]],["Konten",[["posts","\u{1F4DD}","Tulisan"],["events","\u{1F4C5}","Agenda"]]],["Halaman",[["focus","\u{1F333}","Bidang Fokus"],["steps","\u{1FAA2}","Langkah Advokasi"],["issues","\u{1F3AF}","Isu Prioritas"],["site","⚙️","Informasi Situs"]]],["Sistem",[["pass","\u{1F511}","Password"],["backup","\u{1F4BE}","Ekspor / Impor"]]]];
+var TILES=[["Konten",["posts","events"]],["Halaman",["focus","steps","issues","site"]],["Sistem",["pass","backup"]]];
+var TNAME={site:["⚙️","Informasi Situs"],pass:["\u{1F511}","Ubah Password"],backup:["\u{1F4BE}","Ekspor / Impor"]};
+function tinfo(k){return COLL[k]?[COLL[k].ico,COLL[k].t]:TNAME[k]}
+
+function viewLogin(){
+  return'<div class="login"><form id="lf" class="card fm" style="max-width:380px"><div class="brand"><i>SCM</i>SCM Panel</div><p>Masuk untuk mengelola situs</p>'+
+  (S.err?'<div class="msg err">'+esc(S.err)+'</div>':'')+
+  '<label for="lp">Password</label><input id="lp" type="password" required autocomplete="current-password" autofocus><button class="btn" style="margin-top:6px"'+(S.busy?" disabled":"")+'>Masuk</button><p style="margin:12px 0 0"><a href="../">← Kembali ke situs</a></p></form></div>'}
+
+function viewPanel(){
+  var D=S.data;
+  var h='<div class="top"><div class="brand"><i>SCM</i>SCM Panel</div><input class="search" id="q" placeholder="Cari fitur…" value="'+esc(S.q)+'"><span class="sp"></span><span class="user">\u{1F464} admin</span><a class="btn o sm" href="../" target="_blank" rel="noopener">Lihat Situs</a>'+(S.mode==="api"?'<button class="btn o sm" data-a="logout">Keluar</button>':"")+'</div>';
+  h+='<div class="layout"><aside class="side">'+NAV.map(function(g){var items=g[1].filter(function(t){return!(S.mode==="local"&&t[0]==="pass")});return'<h6>'+g[0]+'</h6>'+items.map(function(t){return'<button data-t="'+t[0]+'" class="'+(S.tab===t[0]?"on":"")+'"><span>'+t[1]+'</span>'+t[2]+(COLL[t[0]]?'<span class="n">'+D[t[0]].length+'</span>':'')+'</button>'}).join("")}).join("")+'</aside><main class="main">';
+  if(S.mode==="local")h+='<div class="warn"><b>Mode lokal.</b> Server fungsi Netlify tidak terdeteksi, jadi perubahan hanya tersimpan di browser ini dan <u>belum</u> tampil untuk pengunjung. Gunakan <b>Ekspor Data</b> lalu ganti <code>data/content.json</code> dan deploy ulang, atau jalankan lewat Netlify (lihat panduan).</div>';
+  if(S.dp)h+='<div class="warn">⚠️ Anda masih memakai password bawaan <b>admin123</b>. <a href="#" data-t="pass">Ganti sekarang</a> atau set variabel <code>ADMIN_PASSWORD</code> di Netlify.</div>';
+  if(S.msg)h+='<div class="msg">'+esc(S.msg)+'</div>';
+  if(S.err)h+='<div class="msg err">'+esc(S.err)+'</div>';
+  var v=COLL[S.tab]?viewList:({home:viewHome,site:viewSite,pass:viewPass,backup:viewBackup}[S.tab]||viewHome);
+  return h+v()+'</main></div>'}
+
+function viewHome(){
+  var D=S.data,q=S.q.toLowerCase(),tiles=TILES.map(function(g){
+    var items=g[1].filter(function(k){var i=tinfo(k);return!(S.mode==="local"&&k==="pass")&&(!q||i[1].toLowerCase().indexOf(q)>-1||g[0].toLowerCase().indexOf(q)>-1)});
+    if(!items.length)return"";
+    return'<div class="grp"><h3>'+g[0]+'</h3><div class="tiles">'+items.map(function(k){var i=tinfo(k);return'<button class="tile" data-t="'+k+'"><span>'+i[0]+'</span><b>'+i[1]+'</b></button>'}).join("")+'</div></div>'}).join("");
+  var last=D.v>1e12?new Date(D.v).toLocaleString("id-ID"):"–";
+  return'<h1>Beranda</h1><p class="sub">Kelola seluruh konten situs '+esc(D.s.name)+' dari satu tempat.</p><div class="home"><div class="card">'+(tiles||'<p>Tidak ada fitur yang cocok.</p>')+'</div>'+
+  '<div class="card"><h2>Informasi Umum</h2><table class="info"><tr><td>Mode</td><td>'+(S.mode==="api"?'<span class="badge">Server Netlify</span>':'<span class="badge w">Lokal</span>')+'</td></tr><tr><td>Tulisan</td><td>'+D.posts.length+'</td></tr><tr><td>Agenda</td><td>'+D.events.length+'</td></tr><tr><td>Bidang fokus</td><td>'+D.focus.length+'</td></tr><tr><td>Isu prioritas</td><td>'+D.issues.length+'</td></tr><tr><td>Terakhir disimpan</td><td>'+esc(last)+'</td></tr>'+(S.mode==="api"?'<tr><td>Status password</td><td>'+(S.dp?'<span class="badge b">Bawaan</span>':'<span class="badge">Aman</span>')+'</td></tr>':'')+'</table></div></div>'}
+
+function cell(k,i){return esc(String(i[k]==null?"":i[k]).slice(0,90))}
+function viewList(){
+  var C=COLL[S.tab],L=S.data[S.tab],e=S.edit;
+  if(e){
+    var x=e==="new"?{}:L.filter(function(i){return i.id===e})[0]||{};
+    return'<h1>'+(e==="new"?"Tambah":"Edit")+' '+C.t+'</h1><p class="sub">Isi formulir lalu simpan.</p><form id="ef" class="card fm" data-id="'+esc(x.id||"")+'">'+C.f.map(function(f,n){
+      var k=f[0],t=f[2],val=x[k],lab='<label for="f'+n+'">'+f[1]+(f[4]?" *":"")+(f[5]?' <span class="hint">— '+esc(f[5])+'</span>':"")+'</label>';
+      if(t==="select")return lab+'<select id="f'+n+'">'+f[3].map(function(c){return'<option'+((val||f[3][0])===c?" selected":"")+'>'+esc(c)+'</option>'}).join("")+'</select>';
+      if(t==="date")return lab+'<input id="f'+n+'" type="date" value="'+esc(val||new Date().toISOString().slice(0,10))+'">';
+      if(t==="area")return lab+'<textarea id="f'+n+'" rows="'+f[3]+'">'+esc(val)+'</textarea>';
+      return lab+'<input id="f'+n+'" maxlength="'+f[3]+'"'+(f[4]?" required":"")+' value="'+esc(val)+'">'}).join("")+
+    '<div class="row"><button class="btn"'+(S.busy?" disabled":"")+'>Simpan</button><button type="button" class="btn o" data-a="cancel">Batal</button></div></form>'}
+  var lq=S.lq.toLowerCase(),rows=L.map(function(i,n){return[i,n]}).filter(function(p){return!lq||JSON.stringify(p[0]).toLowerCase().indexOf(lq)>-1});
+  return'<h1>'+C.t+'</h1><p class="sub">'+L.length+' item.</p><div class="card"><div class="row" style="margin-bottom:12px"><button class="btn" data-a="new">+ Tambah</button><input id="lq" style="max-width:240px" placeholder="Filter…" value="'+esc(S.lq)+'"></div><div class="tw"><table><tr>'+C.cols.map(function(k){var f=C.f.filter(function(f){return f[0]===k})[0];return'<th>'+(f?f[1]:k)+'</th>'}).join("")+'<th></th></tr>'+
+  (rows.map(function(p){var i=p[0],n=p[1];return'<tr>'+C.cols.map(function(k){return'<td>'+cell(k,i)+'</td>'}).join("")+'<td style="white-space:nowrap;text-align:right">'+(C.order&&!lq?'<span class="ord"><button class="btn o sm" data-a="up" data-id="'+esc(i.id)+'" title="Naik"'+(n===0?" disabled":"")+'>↑</button> <button class="btn o sm" data-a="dn" data-id="'+esc(i.id)+'" title="Turun"'+(n===L.length-1?" disabled":"")+'>↓</button></span> ':'')+'<button class="btn o sm" data-a="edit" data-id="'+esc(i.id)+'">Edit</button> <button class="btn d sm" data-a="del" data-id="'+esc(i.id)+'">Hapus</button></td></tr>'}).join("")||'<tr><td colspan="'+(C.cols.length+1)+'">Belum ada data.</td></tr>')+'</table></div></div>'}
+
+function viewSite(){
+  var s=S.data.s;
+  return'<h1>Informasi Situs</h1><p class="sub">Teks di halaman depan, footer, Tentang, dan Kontak.</p><form id="sf" class="card fm"><label>Nama situs</label><input id="s1" maxlength="80" value="'+esc(s.name)+'"><label>Label atas hero</label><input id="s2" maxlength="160" value="'+esc(s.k)+'"><label>Judul hero</label><input id="s3" maxlength="240" value="'+esc(s.h)+'"><label>Teks hero / deskripsi singkat</label><textarea id="s4" rows="3">'+esc(s.t)+'</textarea><label>Email kontak</label><input id="s5" type="email" maxlength="120" value="'+esc(s.email)+'"><label>Alamat / wilayah</label><input id="s7" maxlength="200" value="'+esc(s.addr)+'"><label>Teks Tentang <span class="hint">— mendukung ## Judul, - daftar, **tebal**</span></label><textarea id="s6" rows="10">'+esc(s.about)+'</textarea><div><button class="btn"'+(S.busy?" disabled":"")+'>Simpan</button></div></form>'}
+
+function viewPass(){
+  return'<h1>Ubah Password</h1><p class="sub">Password disimpan di server dalam bentuk hash (scrypt). Setelah diganti, semua sesi lain otomatis keluar.</p><form id="pf" class="card fm" style="max-width:420px"><label>Password lama</label><input id="p0" type="password" required autocomplete="current-password"><label>Password baru (min. 8 karakter)</label><input id="p1" type="password" required minlength="8" autocomplete="new-password"><label>Ulangi password baru</label><input id="p2" type="password" required autocomplete="new-password"><div><button class="btn">Ganti Password</button></div></form>'}
+
+function viewBackup(){
+  return'<h1>Ekspor / Impor</h1><p class="sub">Cadangkan semua konten, atau pulihkan dari file JSON.</p><div class="card fm"><div class="row"><button class="btn" data-a="exj">Ekspor Data (JSON)</button></div><label for="imp">Impor Data (JSON) <span class="hint">— menimpa seluruh konten</span></label><input type="file" id="imp" accept=".json,application/json"><div><button class="btn d" data-a="reset">Kembalikan ke Bawaan</button></div></div>'+(S.mode==="api"?'<p class="sub">Server menyimpan satu salinan otomatis dari versi sebelumnya setiap kali Anda menyimpan.</p>':'')}
+
+function render(){
+  var f=document.activeElement,id=f&&(f.id==="q"||f.id==="lq")?f.id:null,pos=id?f.selectionStart:0;
+  $("root").innerHTML=(S.mode==="local"||S.token)&&S.data?viewPanel():viewLogin();
+  if(id&&$(id)){$(id).focus();$(id).setSelectionRange(pos,pos)}}
+
+document.addEventListener("input",function(ev){
+  if(ev.target.id==="q"){S.q=ev.target.value;S.tab="home";S.edit=null;render()}
+  if(ev.target.id==="lq"){S.lq=ev.target.value;render()}});
+document.addEventListener("click",async function(ev){
+  var b=ev.target.closest("[data-t],[data-a]");if(!b||b.disabled)return;
+  if(b.tagName==="A")ev.preventDefault();
+  if(b.dataset.t){S.tab=b.dataset.t;S.edit=null;S.msg="";S.err="";S.lq="";return render()}
+  var a=b.dataset.a,id=b.dataset.id,L=S.data&&S.data[S.tab];
+  if(a==="logout"){await api("logout",{});S.token="";sset("scm_tok",null);S.data=null;S.err="";return render()}
+  if(a==="new"){S.edit="new";S.msg="";S.err="";render()}
+  if(a==="edit"){S.edit=id;S.msg="";S.err="";render()}
+  if(a==="cancel"){S.edit=null;render()}
+  if(a==="up"||a==="dn"){var n=L.findIndex(function(i){return i.id===id}),m=a==="up"?n-1:n+1;if(m>=0&&m<L.length){var t=L[n];L[n]=L[m];L[m]=t;await persist("Urutan diubah.")}}
+  if(a==="del"&&confirm("Hapus item ini? Tindakan tidak bisa dibatalkan.")){S.data[S.tab]=L.filter(function(i){return i.id!==id});await persist("Item dihapus.")}
+  if(a==="exj"){var l=document.createElement("a");l.href=URL.createObjectURL(new Blob([JSON.stringify(S.data,null,2)],{type:"application/json"}));l.download="content-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(l);l.click();l.remove()}
+  if(a==="reset"&&confirm("Kembalikan SEMUA konten ke data bawaan? Konten saat ini akan diganti.")){try{S.data=await staticData();await persist("Data dikembalikan ke bawaan.")}catch(e){flash("Gagal memuat data bawaan.",true)}}});
+document.addEventListener("change",function(ev){
+  if(ev.target.id!=="imp")return;var f=ev.target.files[0];if(!f)return;var r=new FileReader();
+  r.onload=async function(){try{var o=JSON.parse(r.result);if(!o.s||!Array.isArray(o.posts)||!Array.isArray(o.events))throw 0;if(confirm("Impor akan menimpa seluruh konten saat ini. Lanjutkan?")){S.data=norm(o);await persist("Impor berhasil.")}}catch(e){flash("File tidak valid.",true)}};r.readAsText(f)});
+document.addEventListener("submit",async function(ev){
+  ev.preventDefault();var id=ev.target.id,v=function(i){return $(i).value};
+  if(id==="lf"){S.busy=true;render();var r=await api("login",{password:v("lp")});S.busy=false;
+    if(r.ok){S.token=r.token;sset("scm_tok",r.token);S.dp=r.default_pw;S.err="";await loadData();S.tab="home";render()}else{S.err=r.error||"Gagal masuk.";render()}}
+  if(id==="ef"){var C=COLL[S.tab],L=S.data[S.tab],did=ev.target.dataset.id,x=did?L.filter(function(i){return i.id===did})[0]:null;
+    if(!x){x={id:uid()};L.unshift(x)}
+    C.f.forEach(function(f,n){var val=v("f"+n);x[f[0]]=f[0]==="mon"?val.toUpperCase():val});
+    S.edit=null;await persist("Tersimpan.")}
+  if(id==="sf"){var s=S.data.s;s.name=v("s1");s.k=v("s2");s.h=v("s3");s.t=v("s4");s.email=v("s5");s.addr=v("s7");s.about=v("s6");await persist("Pengaturan tersimpan.")}
+  if(id==="pf"){if(v("p1")!==v("p2"))return flash("Konfirmasi password tidak sama.",true);var r=await api("passwd",{old:v("p0"),new:v("p1")});if(r.ok){S.token=r.token;sset("scm_tok",r.token);S.dp=false;flash("Password berhasil diganti.")}else flash(r.error||"Gagal.",true)}});
+boot();
+</script>
+</body>
+</html>
